@@ -54,54 +54,82 @@ const Index = () => {
               Your ultimate guide to mobile technology with comprehensive reviews and comparisons.
             </p>
 
-            {/* Hero Search */}
-            <div className="max-w-2xl mx-auto flex space-x-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                <Input
-                  placeholder="Search for phones, brands, or features..."
-                  className="pl-10 h-12 text-lg"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-              </div>
-              <Button size="lg" className="h-12 px-8">
-                Search
-              </Button>
-            </div>
+            {/* Hero Section */}
+<section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-blue-50/50 dark:to-gray-900/50">
+  <div className="container mx-auto px-4 py-20">
+    <div className="text-center space-y-8 animate-fade-in">
+      <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent">
+        Complete Mobile Phone Specifications
+      </h1>
+      <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        Discover detailed specs, compare features, and find your perfect smartphone.
+        Your ultimate guide to mobile technology with comprehensive reviews and comparisons.
+      </p>
 
-            {/* Quick Filters */}
-            <div className="flex flex-wrap justify-center gap-4">
-              <Select value={selectedBrand} onValueChange={setSelectedBrand}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Brand" />
-                </SelectTrigger>
-                <SelectContent>
-                  {brands.map(brand => (
-                    <SelectItem key={brand} value={brand}>{brand}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Category" />
-                </SelectTrigger>
-                <SelectContent>
-                  {categories.map(category => (
-                    <SelectItem key={category} value={category}>{category}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
-              <Button variant="outline" size="lg">
-                <Filter className="h-4 w-4 mr-2" />
-                More Filters
-              </Button>
-            </div>
-          </div>
+      {/* Hero Search */}
+      <form
+        className="max-w-2xl mx-auto flex space-x-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          // Add your search handler here, e.g. navigate or filter
+          console.log('Search for:', searchTerm);
+        }}
+        role="search"
+        aria-label="Search phones, brands or features"
+      >
+        <div className="flex-1 relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Input
+            type="search"
+            aria-label="Search phones, brands, or features"
+            placeholder="Search for phones, brands, or features..."
+            className="pl-10 h-12 text-lg"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
         </div>
-      </section>
+        <Button type="submit" size="lg" className="h-12 px-8">
+          Search
+        </Button>
+      </form>
+
+      {/* Quick Filters */}
+      <div className="flex flex-wrap justify-center gap-4 mt-8">
+        <Select value={selectedBrand} onValueChange={setSelectedBrand}>
+          <SelectTrigger className="w-40">
+            <SelectValue placeholder="Brand" />
+          </SelectTrigger>
+          <SelectContent>
+            {brands.map((brand) => (
+              <SelectItem key={brand} value={brand}>
+                {brand}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+          <SelectTrigger className="w-40">
+            <SelectValue placeholder="Category" />
+          </SelectTrigger>
+          <SelectContent>
+            {categories.map((category) => (
+              <SelectItem key={category} value={category}>
+                {category}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Button variant="outline" size="lg" className="flex items-center">
+          <Filter className="h-4 w-4 mr-2" />
+          More Filters
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* Featured Categories */}
       <section className="py-16 bg-muted/30">
