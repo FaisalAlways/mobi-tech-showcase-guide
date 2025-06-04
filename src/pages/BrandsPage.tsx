@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/layout/Header';
@@ -12,39 +11,32 @@ import { Smartphone } from 'lucide-react';
 const BrandsPage = () => {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('darkMode') === 'true' || 
-             (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      const stored = localStorage.getItem('darkMode');
+      return stored ? stored === 'true' : window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     return false;
   });
 
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('darkMode', 'true');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('darkMode', 'false');
-    }
+    const root = document.documentElement;
+    root.classList.toggle('dark', darkMode);
+    localStorage.setItem('darkMode', darkMode.toString());
   }, [darkMode]);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
-  const getBrandPhoneCount = (brand: string) => {
-    return phones.filter(phone => phone.brand === brand).length;
-  };
+  const getBrandPhoneCount = (brand: string) =>
+    phones.filter((phone) => phone.brand.toLowerCase() === brand.toLowerCase()).length;
 
   const getBrandImage = (brand: string) => {
-    const brandPhone = phones.find(phone => phone.brand === brand);
-    return brandPhone?.image || '/placeholder.svg';
+    const phone = phones.find((p) => p.brand.toLowerCase() === brand.toLowerCase());
+    return phone?.image || '/placeholder.svg';
   };
 
   return (
     <div className="min-h-screen bg-background">
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      
+
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-12 animate-fade-in">
@@ -59,11 +51,11 @@ const BrandsPage = () => {
         {/* Brands Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {brands.map((brand, index) => (
-            <Link 
-              key={brand} 
+            <Link
+              key={brand}
               to={`/brand/${brand.toLowerCase()}`}
               className="group block animate-fade-in"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}
             >
               <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 bg-gradient-to-br from-background to-muted/20">
                 <CardContent className="p-6">
@@ -75,18 +67,17 @@ const BrandsPage = () => {
                         alt={brand}
                         className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
                         onError={(e) => {
-                          e.currentTarget.style.display = '';
-                          e.currentTarget.nextElementSibling?.classList.remove('');
+                          e.currentTarget.style.display = 'none';
                         }}
                       />
-                      <Smartphone className="h-8 w-8 text-primary" />
+                      <Smartphone className="h-8 w-8 text-primary absolute" />
                     </div>
-                    
+
                     {/* Brand Name */}
                     <h3 className="text-xl font-semibold group-hover:text-primary transition-colors duration-300">
                       {brand}
                     </h3>
-                    
+
                     {/* Phone Count */}
                     <div className="flex justify-center">
                       <Badge variant="secondary" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
@@ -100,7 +91,7 @@ const BrandsPage = () => {
           ))}
         </div>
       </div>
-      
+
       <Footer />
     </div>
   );
