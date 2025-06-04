@@ -9,6 +9,8 @@ import PhoneDetail from "./pages/PhoneDetail";
 import PhonesListing from "./pages/PhonesListing";
 import BrandPage from "./pages/BrandPage";
 import CategoryPage from "./pages/CategoryPage";
+import BrandsPage from "./pages/BrandsPage";
+import CategoriesPage from "./pages/CategoriesPage";
 import ComparePage from "./pages/ComparePage";
 import NotFound from "./pages/NotFound";
 
@@ -24,7 +26,9 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/phones" element={<PhonesListing />} />
           <Route path="/phone/:id" element={<PhoneDetail />} />
+          <Route path="/brands" element={<BrandsPage />} />
           <Route path="/brand/:brand" element={<BrandPage />} />
+          <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           <Route path="/compare" element={<ComparePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
