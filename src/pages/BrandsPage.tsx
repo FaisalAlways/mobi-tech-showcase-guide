@@ -36,14 +36,14 @@ const BrandsPage = () => {
     return phone?.image || '/placeholder.svg';
   };
 
-  if (!hasMounted) return null; // Prevent render until darkMode is known
+  if (!hasMounted) return null;
 
   return (
     <div className="min-h-screen bg-background">
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-12 animate-fade-in">
+        <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             Phone Brands
           </h1>
@@ -53,21 +53,20 @@ const BrandsPage = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {brands.map((brand, index) => (
+          {brands.map((brand) => (
             <Link
               key={brand}
               to={`/brand/${brand.toLowerCase()}`}
-              className="group block animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'both' }}
+              className="block"
             >
-              <Card className="hover:shadow-xl transition-all duration-300 hover:scale-105 hover:-translate-y-2 bg-gradient-to-br from-background to-muted/20">
+              <Card className="bg-gradient-to-br from-background to-muted/20">
                 <CardContent className="p-6">
                   <div className="text-center space-y-4">
-                    <div className="relative w-20 h-20 mx-auto mb-4 overflow-hidden rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300">
+                    <div className="relative w-20 h-20 mx-auto mb-4 overflow-hidden rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
                       <img
                         src={getBrandImage(brand)}
                         alt={brand}
-                        className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
+                        className="w-12 h-12 object-contain"
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
@@ -75,12 +74,12 @@ const BrandsPage = () => {
                       <Smartphone className="h-8 w-8 text-primary absolute" />
                     </div>
 
-                    <h3 className="text-xl font-semibold group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-xl font-semibold">
                       {brand}
                     </h3>
 
                     <div className="flex justify-center">
-                      <Badge variant="secondary" className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                      <Badge variant="secondary">
                         {getBrandPhoneCount(brand)} phones
                       </Badge>
                     </div>
