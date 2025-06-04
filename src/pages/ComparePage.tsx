@@ -11,7 +11,13 @@ import type { Phone } from '@/types/phone';
 
 const ComparePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('darkMode') === 'true' || 
+             (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+    return false;
+  });
   const [comparePhones, setComparePhones] = useState<Phone[]>([]);
   const [selectedPhone, setSelectedPhone] = useState('');
 
@@ -26,8 +32,10 @@ const ComparePage = () => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
     }
   }, [darkMode]);
 

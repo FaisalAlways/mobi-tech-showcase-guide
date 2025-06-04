@@ -14,7 +14,13 @@ import { phones, brands, categories } from '@/data/phones';
 import type { Phone } from '@/types/phone';
 
 const PhonesListing = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('darkMode') === 'true' || 
+             (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    }
+    return false;
+  });
   const [filteredPhones, setFilteredPhones] = useState<Phone[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
@@ -28,8 +34,10 @@ const PhonesListing = () => {
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('darkMode', 'true');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('darkMode', 'false');
     }
   }, [darkMode]);
 
@@ -352,10 +360,10 @@ const PhonesListing = () => {
             </div>
           )}
 
-          {/* Phone Grid */}
+          {/* Phone Grid - Updated to show 4 cards per line */}
           <div className="flex-1">
             {filteredPhones.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filteredPhones.map((phone) => (
                   <PhoneCard key={phone.id} phone={phone} />
                 ))}
