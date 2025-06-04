@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { ArrowLeft, X } from 'lucide-react';
@@ -7,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { phones, Phone } from '@/data/phones';
+import { phones } from '@/data/phones';
+import type { Phone } from '@/types/phone';
 
 const ComparePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();

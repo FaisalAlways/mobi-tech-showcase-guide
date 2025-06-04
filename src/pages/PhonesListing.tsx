@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Filter, SlidersHorizontal, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
@@ -11,7 +10,8 @@ import { Separator } from '@/components/ui/separator';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PhoneCard from '@/components/PhoneCard';
-import { phones, brands, categories, Phone } from '@/data/phones';
+import { phones, brands, categories } from '@/data/phones';
+import type { Phone } from '@/types/phone';
 
 const PhonesListing = () => {
   const [darkMode, setDarkMode] = useState(false);
