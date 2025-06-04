@@ -45,8 +45,8 @@ const Index = () => {
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-blue-50/50 dark:to-gray-900/50">
         <div className="container mx-auto px-4 py-20">
-          <div className="text-center space-y-8 animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text">
+          <div className="text-center space-y-8">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent">
               Complete Mobile Phone Specifications
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -159,7 +159,7 @@ const Index = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {featuredPhones.map((phone) => (
-              <div key={phone.id} className="animate-scale-in">
+              <div key={phone.id}>
                 <PhoneCard phone={phone} />
               </div>
             ))}
@@ -173,7 +173,7 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Latest Releases</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {latestPhones.map((phone) => (
-              <div key={phone.id} className="">
+              <div key={phone.id}>
                 <PhoneCard phone={phone} />
               </div>
             ))}
