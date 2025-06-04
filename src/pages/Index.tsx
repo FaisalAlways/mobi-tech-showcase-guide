@@ -1,30 +1,30 @@
-
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, Filter, Star, Smartphone, Zap, Camera, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PhoneCard from '@/components/PhoneCard';
 import { phones, brands, categories } from '@/data/phones';
 
 const Index = () => {
-  const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('darkMode') === 'true' || 
-             (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches);
-    }
-    return false;
-  });
+  const [darkMode, setDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  
+
   const featuredPhones = phones.filter(phone => phone.featured);
   const latestPhones = phones.slice(0, 5);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialMode = savedMode ? savedMode === 'true' : prefersDark;
+
+    setDarkMode(initialMode);
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -36,14 +36,12 @@ const Index = () => {
     }
   }, [darkMode]);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   return (
     <div className="min-h-screen bg-background">
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-blue-50/50 dark:to-gray-900/50">
         <div className="container mx-auto px-4 py-20">
@@ -52,10 +50,10 @@ const Index = () => {
               Complete Mobile Phone Specifications
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Discover detailed specs, compare features, and find your perfect smartphone. 
+              Discover detailed specs, compare features, and find your perfect smartphone.
               Your ultimate guide to mobile technology with comprehensive reviews and comparisons.
             </p>
-            
+
             {/* Hero Search */}
             <div className="max-w-2xl mx-auto flex space-x-4">
               <div className="flex-1 relative">
@@ -71,7 +69,7 @@ const Index = () => {
                 Search
               </Button>
             </div>
-            
+
             {/* Quick Filters */}
             <div className="flex flex-wrap justify-center gap-4">
               <Select value={selectedBrand} onValueChange={setSelectedBrand}>
@@ -84,7 +82,7 @@ const Index = () => {
                   ))}
                 </SelectContent>
               </Select>
-              
+
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
                 <SelectTrigger className="w-40">
                   <SelectValue placeholder="Category" />
@@ -95,7 +93,7 @@ const Index = () => {
                   ))}
                 </SelectContent>
               </Select>
-              
+
               <Button variant="outline" size="lg">
                 <Filter className="h-4 w-4 mr-2" />
                 More Filters
@@ -143,7 +141,7 @@ const Index = () => {
               <Button variant="outline">View All Phones</Button>
             </Link>
           </div>
-          
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {featuredPhones.map((phone) => (
               <div key={phone.id} className="animate-scale-in">
