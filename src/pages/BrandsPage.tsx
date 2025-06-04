@@ -75,11 +75,11 @@ const BrandsPage = () => {
                         alt={brand}
                         className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
                         onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                          e.currentTarget.style.display = '';
+                          e.currentTarget.nextElementSibling?.classList.remove('');
                         }}
                       />
-                      <Smartphone className="h-8 w-8 text-primary hidden" />
+                      <Smartphone className="h-8 w-8 text-primary" />
                     </div>
                     
                     {/* Brand Name */}
