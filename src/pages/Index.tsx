@@ -46,7 +46,7 @@ const Index = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-blue-50/50 dark:to-gray-900/50">
         <div className="container mx-auto px-4 py-20">
           <div className="text-center space-y-8 animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-primary via-blue-600 to-purple-600 bg-clip-text">
               Complete Mobile Phone Specifications
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
