@@ -158,7 +158,7 @@ const Index = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Latest Releases</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {latestPhones.map((phone) => (
-              <div key={phone.id} className="animate-fade-in">
+              <div key={phone.id} className="">
                 <PhoneCard phone={phone} />
               </div>
             ))}
